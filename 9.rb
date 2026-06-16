@@ -1,29 +1,35 @@
-class BankAccount:
-  def _init_(self,inital_balance=0):
-    self.balance = inital_balance
+class BankAccount
+  attr_reader :balance
 
-  @property
-  def balance(self):
-    return self._balance 
+  def initialize(balance = 0)
+    @balance = balance
+  end
 
-  def deposit(self,amount):
-    if amount >0:
-      self._balance += amount
-    else: 
-      raise ValueError("Deposit amount must be postive")
+  def deposit(amount)
+    if amount <= 0
+      raise "Amount must be positive" 
+    end
 
-  def withdraw(self,amount):
-    if amount <=0:
-      raise ValueError("Withdrawal amount must be postitve")
-    if amount > self._balance:
-      raise ValueError("Insufficient Funds")
-    self._balance -= amount
+    @balance += amount
+  end
 
-account = BankAccount(100)
+  def withdraw(amount)
+    if amount <= 0
+      raise "Amount must be positive" 
+    elsif amount > @balance
+      raise "Insufficient funds" 
+    end
+    @balance -= amount
+  end
+end
 
-puts (account.balance)
-account.deposit(50)
-puts (account.balance)
-account.withdraw(30)
+
+account = BankAccount.new(100)
+
 puts account.balance
 
+account.deposit(50)
+puts account.balance
+
+account.withdraw(30)
+puts account.balance
